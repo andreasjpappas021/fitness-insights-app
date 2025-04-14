@@ -1,12 +1,21 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowUpFromLine, Calendar, ChevronUp, Dumbbell, Heart, LineChart, Utensils } from "lucide-react"
+import {
+  ArrowUpFromLine,
+  Calendar,
+  ChevronUp,
+  Dumbbell,
+  Heart,
+  LineChart,
+  Utensils,
+} from "lucide-react"
 import Link from "next/link"
 import WeightChart from "@/components/weight-chart"
 import MoodTracker from "@/components/mood-tracker"
 import RecommendationCard from "@/components/recommendation-card"
 import HealthDataImport from "@/components/health-data-import"
+import WorkoutHistory from "@/components/workout-history"
 
 export default function Dashboard() {
   return (
@@ -86,6 +95,7 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
+
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -93,6 +103,7 @@ export default function Dashboard() {
             <TabsTrigger value="workouts">Workouts</TabsTrigger>
             <TabsTrigger value="insights">Insights</TabsTrigger>
           </TabsList>
+
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <Card className="col-span-1 lg:col-span-2">
@@ -148,6 +159,7 @@ export default function Dashboard() {
               </Card>
             </div>
           </TabsContent>
+
           <TabsContent value="meals" className="space-y-4">
             <Card>
               <CardHeader>
@@ -157,10 +169,7 @@ export default function Dashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-3">
-                    <Link
-                      href="/meals/breakfast"
-                      className="group block space-y-2 rounded-lg border p-4 hover:bg-gray-50"
-                    >
+                    <Link href="/meals/breakfast" className="group block space-y-2 rounded-lg border p-4 hover:bg-gray-50">
                       <div className="font-medium">Breakfast</div>
                       <div className="text-sm text-gray-500">Oatmeal with fruit and nuts</div>
                     </Link>
@@ -178,6 +187,7 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           </TabsContent>
+
           <TabsContent value="workouts" className="space-y-4">
             <Card>
               <CardHeader>
@@ -189,7 +199,9 @@ export default function Dashboard() {
                   {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => (
                     <div
                       key={day}
-                      className={`rounded-lg border p-3 text-center ${i === 1 || i === 3 || i === 5 ? "bg-green-50 border-green-200" : ""}`}
+                      className={`rounded-lg border p-3 text-center ${
+                        i === 1 || i === 3 || i === 5 ? "bg-green-50 border-green-200" : ""
+                      }`}
                     >
                       <div className="font-medium">{day}</div>
                       {i === 1 || i === 3 || i === 5 ? (
@@ -202,7 +214,11 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* ✅ Supabase workout list */}
+            <WorkoutHistory />
           </TabsContent>
+
           <TabsContent value="insights" className="space-y-4">
             <Card>
               <CardHeader>
@@ -214,15 +230,13 @@ export default function Dashboard() {
                   <div className="rounded-lg bg-blue-50 p-4">
                     <div className="font-medium text-blue-700">Calorie Adjustment</div>
                     <p className="mt-1 text-sm text-blue-600">
-                      Based on your recent workouts, you can consume an additional 300 calories today while maintaining
-                      your weight goal.
+                      Based on your recent workouts, you can consume an additional 300 calories today while maintaining your weight goal.
                     </p>
                   </div>
                   <div className="rounded-lg bg-amber-50 p-4">
                     <div className="font-medium text-amber-700">Activity Reminder</div>
                     <p className="mt-1 text-sm text-amber-600">
-                      You've been less active in the past 3 days. Consider a light workout today or watching your
-                      calorie intake.
+                      You've been less active in the past 3 days. Consider a light workout today or watching your calorie intake.
                     </p>
                   </div>
                 </div>
